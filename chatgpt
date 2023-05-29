@@ -5,17 +5,16 @@ normal=$(tput sgr0)
 user=$(whoami)
 
 clear
-echo  -e "    ________          __  __________  ______  "
-echo  -e "   / ____/ /_  ____ _/ /_/ ____/ __ \/_  __/ "
+echo  -e "    ________          __  __________  ______   "
+echo  -e "   / ____/ /_  ____ _/ /_/ ____/ __ \/_  __/   "
 echo  -e "  / /   / __ \/ __ \`/ __/ / __/ /_/ / / /     "
 echo  -e " / /___/ / / / /_/ / /_/ /_/ / ____/ / /       " 
 echo  -e " \____/_/ /_/\__,_/\__/\____/_/     /_/        "
-echo  -e "                                          CLI  " 
 
 while true; do
     echo -n -e "\n ${bold}${user}: ${normal}"
     read -r -e PROMPT
-    OUTPUT=$(curl -s https://api.openai.com/v1/completions -H "Content-Type: application/json" -H "Authorization: Bearer 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" -d "{\"model\": \"text-davinci-003\", \"prompt\": \"${PROMPT}\", \"temperature\": 1, \"max_tokens\": 500}" | python -c "import sys, json; print(json.load(sys.stdin)['choices'][0]['text'].strip())" | sed 's/^[^A-Za-z]*//' | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')   
+    OUTPUT=$(curl -s https://api.openai.com/v1/completions -H "Content-Type: application/json" -H "Authorization: Bearer  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" -d "{\"model\": \"text-davinci-003\", \"prompt\": \"${PROMPT}\", \"temperature\": 1, \"max_tokens\": 500}" | python -c "import sys, json; print(json.load(sys.stdin)['choices'][0]['text'].strip())" | sed 's/^[^A-Za-z]*//' | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')   
     echo -n -e " ${bold}ChatGPT: ${normal}\033[0;37m${OUTPUT}\033[0m"
     echo ""
 done
